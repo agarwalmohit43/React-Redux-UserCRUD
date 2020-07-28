@@ -1,29 +1,32 @@
 import React, { useState, useEffect } from 'react'
 
 const UserInput = () => {
-
-    const
+  const [name, setName] = useState('')
+  const [age, setAge] = useState(0)
 
   const onFormSubmit = (event) => {
     event.preventDefault()
+    console.log('Name', name)
+    console.log('age', age)
   }
 
   return (
-    <div className="ui segment">
+    <div className="ui segment" style={{ width: '300px' }}>
       <form className="ui form" onSubmit={onFormSubmit}>
         <div className="field">
           <label>YouTube Search</label>
           <input
             type="text"
-            placeholder={term}
-            onChange={(e) => setTerm(e.target.value)}
+            placeholder={name}
+            onChange={(e) => setName(e.target.value)}
           />
           <input
-            type="text"
-            placeholder={term}
-            onChange={(e) => setTerm(e.target.value)}
+            type="number"
+            placeholder={age}
+            onChange={(e) => setAge(Number(e.target.value))}
           />
         </div>
+        <button type="Submit">Submit</button>
       </form>
     </div>
   )
