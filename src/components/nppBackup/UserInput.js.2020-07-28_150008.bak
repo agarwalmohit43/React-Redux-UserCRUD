@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { createUser } from '../action'
 
@@ -6,49 +6,33 @@ const UserInput = (props) => {
   const [name, setName] = useState(props.selectedUser.name)
   const [age, setAge] = useState(props.selectedUser.age)
 
-  const refUserName = useRef()
-  const refUserAge = useRef()
-
   const onFormSubmit = (event) => {
     event.preventDefault()
-    if (name) props.createUser(name, age)
-    clearTextFieldValues()
+    props.createUser(name, age)
   }
 
-  const clearTextFieldValues = (event) => {
-    setName('')
-    setAge('')
-    refUserName.current.value = ''
-    refUserAge.current.value = ''
-  }
   return (
-    <div className="ui segment" style={{ width: '350px' }}>
+    <div className="ui card">
       <form className="ui form" onSubmit={onFormSubmit}>
         <div className="field">
           <label>User Input</label>
           <input
             type="text"
-            placeholder="Default Name: Demo"
-            ref={refUserName}
+            placeholder={name}
+            required
             onChange={(e) => setName(e.target.value)}
           />
           <br />
           <input
             type="number"
-            placeholder="Default Age 25"
-            ref={refUserAge}
+            placeholder={age}
+            required
             onChange={(e) => setAge(Number(e.target.value))}
           />
         </div>
-        <div className="ui buttons">
-          <button className="ui button" onClick={clearTextFieldValues}>
-            Cancel
-          </button>
-          <div className="or"></div>
-          <button type="Submit" className="ui positive button active">
-            Save
-          </button>
-        </div>
+        <button type="Submit" className="ui primary button">
+          Submit
+        </button>
       </form>
     </div>
   )

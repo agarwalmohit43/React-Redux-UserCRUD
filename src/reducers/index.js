@@ -19,6 +19,15 @@ const user = (listOfUsers = [{ name: 'Mohit', age: 25 }], action) => {
   return listOfUsers
 }
 
+const selectedUser = (selectedUser = { name: 'Mohit', age: 25 }, action) => {
+  if (action.type === 'SELECTED_USER') {
+    return action.payload
+  }
+
+  return selectedUser
+}
+
 export default combineReducers({
   userData: user,
+  selectedUser: selectedUser,
 })

@@ -2,8 +2,8 @@ export const createUser = (name, age) => {
   return {
     type: 'CREATE_USER',
     payload: {
-      name,
-      age,
+      name: name || 'demo',
+      age: age || 25,
     },
   }
 }
@@ -24,5 +24,12 @@ export const deleteUser = (name) => {
     payload: {
       name,
     },
+  }
+}
+
+export const selectedUser = (user) => {
+  return {
+    type: 'SELECTED_USER',
+    payload: user,
   }
 }
