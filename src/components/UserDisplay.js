@@ -1,7 +1,32 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 
-const UserDisplay = () => {
-  return <div>UserDisplay</div>
+import UserItem from './UserItem'
+import { deleteUser } from '../action'
+
+const UserDisplay = ({ userInfo }) => {
+  const renderTableRow = userInfo.map((user, index) => {
+    return <UserItem user={user} key={index} />
+  })
+
+  return (
+    <div>
+      <table className="ui sortable celled table" style={{ width: '350px' }}>
+        <thead>
+          <tr>
+            <th className="">Name</th>
+            <th className="sorted descending">Age</th>
+            <th className="">Actions</th>
+          </tr>
+        </thead>
+        <tbody>{renderTableRow}</tbody>
+      </table>
+    </div>
+  )
 }
 
-export default UserDisplay
+const mapStateToProps = (state) => {
+  return { userInfo: state.userData }
+}
+
+export default connect(mapStateToProps)(UserDisplay)

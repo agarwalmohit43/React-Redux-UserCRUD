@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux'
 
-const user = (listOfUsers = [], action) => {
+const user = (listOfUsers = [{ name: 'Mohit', age: 25 }], action) => {
   if (action.type === 'CREATE_USER') {
-    return [...listOfUsers, action.payload]
+    let fetchUser = listOfUsers.filter(
+      (element) => element.name !== action.payload.name
+    )
+    return [...fetchUser, action.payload]
   } else if (action.type === 'EDIT_USER') {
     let fetchUser = listOfUsers.filter(
       (element) => element.name !== action.payload.name
