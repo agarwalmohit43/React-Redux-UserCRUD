@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { deleteUser, editUser, selectedUser } from '../action'
+import { deleteUser, updateUser, selectedUser } from '../action'
 import UserInput from './UserInput'
 
-const UserItem = ({ user, deleteUser, editUser, selectedUser }) => {
+const UserItem = ({ user, deleteUser, updateUser, selectedUser }) => {
   return (
     <tr>
       <td>{user.name}</td>
@@ -17,6 +17,7 @@ const UserItem = ({ user, deleteUser, editUser, selectedUser }) => {
           >
             Edit
           </button>
+          <div className="or"></div>
           <button
             type="button"
             className="ui negative button"
@@ -31,10 +32,11 @@ const UserItem = ({ user, deleteUser, editUser, selectedUser }) => {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return { editUser: state.selectedUser }
 }
 
-export default connect(mapStateToProps, { deleteUser, editUser, selectedUser })(
-  UserItem
-)
+export default connect(mapStateToProps, {
+  deleteUser,
+  updateUser,
+  selectedUser,
+})(UserItem)

@@ -11,7 +11,7 @@ const UserDisplay = ({ userInfo }) => {
 
   return (
     <div>
-      <table className="ui sortable celled table" style={{ width: '350px' }}>
+      <table className="ui sortable celled table">
         <thead>
           <tr>
             <th className="">Name</th>

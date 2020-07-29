@@ -8,9 +8,10 @@ export const createUser = (name, age) => {
   }
 }
 
-export const editUser = (name, age) => {
+export const updateUser = (currentUser, name, age) => {
   return {
-    type: 'EDIT_USER',
+    type: 'UPDATE_USER',
+    currentUser,
     payload: {
       name,
       age,
