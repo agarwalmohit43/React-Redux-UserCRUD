@@ -61,7 +61,7 @@ const UserInput = (props) => {
               type="text"
               placeholder={placeHolderName}
               ref={refUserName}
-              pattern="\w"
+              pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$"
               title={placeHolderName}
               onChange={(e) => setName(e.target.value)}
             />
@@ -102,7 +102,7 @@ const UserInput = (props) => {
               placeholder={placeHolderName}
               title={placeHolderName}
               ref={refUserName}
-              pattern="\w"
+              pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$"
               onChange={(e) => setName(e.target.value)}
             />
             <br />
