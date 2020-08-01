@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { createUser, selectedUser, updateUser } from '../action'
 
+const placeHolderName = 'Accepts alphabets only'
+const placeHolderAge = 'Accepts age from 1 to 99, 0 as default : 25'
+
 const UserInput = (props) => {
   const [name, setName] = useState('')
   const [age, setAge] = useState(0)
@@ -56,15 +59,17 @@ const UserInput = (props) => {
             <label>User Input</label>
             <input
               type="text"
-              placeholder="Default Name: Demo"
+              placeholder={placeHolderName}
               ref={refUserName}
+              pattern="\w"
               onChange={(e) => setName(e.target.value)}
             />
             <br />
             <input
-              type="number"
-              placeholder="Default Age 25"
+              type="text"
+              placeholder={placeHolderAge}
               ref={refUserAge}
+              pattern="\d{1,2}"
               onChange={(e) => setAge(Number(e.target.value))}
             />
           </div>
@@ -92,13 +97,17 @@ const UserInput = (props) => {
             <label>User Input</label>
             <input
               type="text"
+              placeholder={placeHolderName}
               ref={refUserName}
+              pattern="\w"
               onChange={(e) => setName(e.target.value)}
             />
             <br />
             <input
-              type="number"
+              type="text"
               ref={refUserAge}
+              placeholder={placeHolderAge}
+              pattern="\d{1,2}"
               onChange={(e) => setAge(Number(e.target.value))}
             />
           </div>
