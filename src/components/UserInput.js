@@ -62,6 +62,7 @@ const UserInput = (props) => {
               placeholder={placeHolderName}
               ref={refUserName}
               pattern="\w"
+              title={placeHolderName}
               onChange={(e) => setName(e.target.value)}
             />
             <br />
@@ -70,6 +71,7 @@ const UserInput = (props) => {
               placeholder={placeHolderAge}
               ref={refUserAge}
               pattern="\d{1,2}"
+              title={placeHolderAge}
               onChange={(e) => setAge(Number(e.target.value))}
             />
           </div>
@@ -98,6 +100,7 @@ const UserInput = (props) => {
             <input
               type="text"
               placeholder={placeHolderName}
+              title={placeHolderName}
               ref={refUserName}
               pattern="\w"
               onChange={(e) => setName(e.target.value)}
@@ -107,6 +110,7 @@ const UserInput = (props) => {
               type="text"
               ref={refUserAge}
               placeholder={placeHolderAge}
+              title={placeHolderAge}
               pattern="\d{1,2}"
               onChange={(e) => setAge(Number(e.target.value))}
             />
