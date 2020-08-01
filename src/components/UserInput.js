@@ -2,13 +2,27 @@ import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { createUser, selectedUser, updateUser } from '../action'
 
+import useInput from '../hooks/useInput'
+
 const placeHolderName = 'Accepts alphabets only'
 const placeHolderAge = 'Accepts age from 1 to 99, 0 as default : 25'
 
+const regexPatternName = '^[A-Za-zs]{1,}[.]{0,1}[A-Za-zs]{0,}$'
+const regexPatternAge = '\\d{1,2}'
+
 const UserInput = (props) => {
-  const [name, setName] = useState('')
-  const [age, setAge] = useState(0)
   const [formState, setFormState] = useState(!Boolean(props.selectedUser))
+
+  const [name, setName, bindName] = useInput(
+    '',
+    regexPatternName,
+    placeHolderName
+  )
+
+  const [age, setAge, bindAge] = useInput(0, regexPatternAge, placeHolderAge)
+
+  const refUserName = useRef()
+  const refUserAge = useRef()
 
   useEffect(() => {
     if (props.selectedUser) {
@@ -19,9 +33,6 @@ const UserInput = (props) => {
       setFormState(true)
     }
   }, [props.selectedUser])
-
-  const refUserName = useRef()
-  const refUserAge = useRef()
 
   const onFormSubmit = (event) => {
     event.preventDefault()
@@ -35,7 +46,7 @@ const UserInput = (props) => {
     clearTextFieldValues()
   }
 
-  const clearTextFieldValues = (event) => {
+  const clearTextFieldValues = () => {
     setName('')
     setAge(25)
     refUserName.current.value = ''
@@ -57,23 +68,9 @@ const UserInput = (props) => {
         <form className="ui form" onSubmit={onFormSubmit}>
           <div className="field">
             <label>User Input</label>
-            <input
-              type="text"
-              placeholder={placeHolderName}
-              ref={refUserName}
-              pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$"
-              title={placeHolderName}
-              onChange={(e) => setName(e.target.value)}
-            />
+            <input type="text" ref={refUserName} {...bindName} />
             <br />
-            <input
-              type="text"
-              placeholder={placeHolderAge}
-              ref={refUserAge}
-              pattern="\d{1,2}"
-              title={placeHolderAge}
-              onChange={(e) => setAge(Number(e.target.value))}
-            />
+            <input type="text" ref={refUserAge} {...bindAge} />
           </div>
           <div className="ui buttons">
             <button className="ui button" onClick={clearTextFieldValues}>
@@ -97,23 +94,9 @@ const UserInput = (props) => {
         <form className="ui form" onSubmit={onFormSubmit}>
           <div className="field">
             <label>User Input</label>
-            <input
-              type="text"
-              placeholder={placeHolderName}
-              title={placeHolderName}
-              ref={refUserName}
-              pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$"
-              onChange={(e) => setName(e.target.value)}
-            />
+            <input type="text" ref={refUserName} {...bindName} />
             <br />
-            <input
-              type="text"
-              ref={refUserAge}
-              placeholder={placeHolderAge}
-              title={placeHolderAge}
-              pattern="\d{1,2}"
-              onChange={(e) => setAge(Number(e.target.value))}
-            />
+            <input type="text" ref={refUserAge} {...bindAge} />
           </div>
           <div className="ui buttons">
             <button className="ui button" onClick={updateFormCancel}>
